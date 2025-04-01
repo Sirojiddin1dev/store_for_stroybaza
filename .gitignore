@@ -1,0 +1,57 @@
+# Python tomonidan yaratiladigan fayllar
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django statik va media fayllari
+/static/
+media/
+
+# Mahalliy sozlamalar
+.env
+*.env
+
+# SQLite ma’lumotlar bazasi
+db.sqlite3
+*.sqlite3
+
+# VS Code, PyCharm, va boshqa IDE fayllari
+.vscode/
+.idea/
+*.iml
+
+# Log va kesh fayllar
+logs/
+*.log
+debug.log
+
+# Virtual muhit fayllari
+venv/
+env/
+*.venv
+
+# Migrations kesh fayllari (lekin actual migration fayllar emas)
+*/migrations/*.pyc
+*/migrations/*.pyo
+*/migrations/__pycache__/
+
+# Node.js va frontend fayllari (agar ishlatilayotgan bo‘lsa)
+node_modules/
+npm-debug.log
+yarn.lock
+package-lock.json
+
+# Docker va Deployment uchun maxsus fayllar
+.dockerignore
+docker-compose.override.yml
+
+# WhiteNoise tomonidan yaratilgan kesh fayllari
+staticfiles/
+whitenoise.cache/
+
+# Jupyter Notebook fayllari (agar ishlatilayotgan bo‘lsa)
+.ipynb_checkpoints/
+
+# Celery va boshqa task queue’lar uchun fayllar
+celerybeat-schedule
+celerybeat.pid
