@@ -108,7 +108,7 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductVariantInline]
     fieldsets = (
         (None, {
-            'fields': ('ikpu','units_id', 'units', 'category', 'is_available', 'branch', "views")
+            'fields': ('category', 'is_available', 'branch', "views")
         }),
         (_('Names'), {
             'fields': ('name_uz', 'name_ru', 'name_en')
@@ -118,6 +118,9 @@ class ProductAdmin(admin.ModelAdmin):
         }),
         (_('Image'), {
             'fields': ('image',)
+        }),
+        (_('others'), {
+            'fields': ('ikpu', 'units_id', 'units_uz', "units_en", "units_ru")
         }),
     )
 

@@ -101,7 +101,9 @@ class Product(models.Model):
     views = models.IntegerField(default=0)
     ikpu = models.CharField(_("ikpu raqami"), max_length=100)
     units_id = models.IntegerField(_("o'lchov birligi raqami"), default=1377058)
-    units = models.CharField(_("o'lchov birligi nomi"), max_length=100, default="dona")
+    units_uz = models.CharField(_("o'lchov birligi nomi (O'zbek)"), max_length=100, default="dona")
+    units_en = models.CharField(_("o'lchov birligi nomi (Русский)"), max_length=100, default="dona")
+    units_ru = models.CharField(_("o'lchov birligi nomi (English)"), max_length=100, default="dona")
 
     def __str__(self):
         return self.name_uz
