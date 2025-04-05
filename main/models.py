@@ -99,6 +99,9 @@ class Product(models.Model):
     description_en = models.TextField(_("Description (English)"), blank=True)
     image = models.ImageField(_("Rasm"), upload_to='products/')
     views = models.IntegerField(default=0)
+    ikpu = models.CharField(_("ikpu raqami"), max_length=100)
+    units_id = models.IntegerField(_("o'lchov birligi raqami"), default=1377058)
+    units = models.CharField(_("o'lchov birligi nomi"), max_length=100, default="dona")
 
     def __str__(self):
         return self.name_uz
@@ -178,8 +181,6 @@ class Order(models.Model):
     delivery_address = models.TextField(_("Yetkazib berish manzili"), null=True, blank=True)
     total_amount = models.DecimalField(_("Umumiy summa"), max_digits=10, decimal_places=2, null=True, blank=True, default=0)
     branch = models.ForeignKey(to='Branch', related_name='Branch', on_delete=models.SET_NULL, null=True, blank=True)
-
-
 
     def __str__(self):
         return f"Buyurtma {self.id} - {self.user.username}"

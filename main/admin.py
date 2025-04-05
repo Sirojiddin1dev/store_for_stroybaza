@@ -108,7 +108,7 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductVariantInline]
     fieldsets = (
         (None, {
-            'fields': ('category', 'is_available', 'branch', "views")
+            'fields': ('ikpu','units_id', 'units', 'category', 'is_available', 'branch', "views")
         }),
         (_('Names'), {
             'fields': ('name_uz', 'name_ru', 'name_en')

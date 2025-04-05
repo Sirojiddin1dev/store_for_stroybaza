@@ -110,7 +110,8 @@ class OrderPaymentUpdate(views.APIView):
                 from click_up import ClickUp
                 click_up = ClickUp(
                     service_id=settings.CLICK_SERVICE_ID,
-                    merchant_id=settings.CLICK_MERCHANT_ID
+                    merchant_id=settings.CLICK_MERCHANT_ID,
+                    secret_key=settings.CLICK_SECRET_KEY
                 )
                 payment_link = click_up.initializer.generate_pay_link(
                     id=order.id,

@@ -11,29 +11,33 @@ class PaymeCallBackAPIView(PaymeWebHookAPIView):
     """
 
     def check_perform_transaction(self, params):
-        """
-        To'lovni amalga oshirish mumkinligini tekshirish.
-        """
         account = self.fetch_account(params)
         self.validate_amount(account, params.get('amount'))
 
         result = response.CheckPerformTransaction(allow=True)
-
-        # Statik ma'lumotlar o'rniga buyurtma haqida dinamik ma'lumotlarni qo'shish mumkin
         order = account
+        total_price = sum([item.price * item.quantity for item in order.items.all()])
 
-        item = response.Item(
-            discount=0,
-            title=f"Buyurtma #{order.id}",
-            price=int(order.total_amount * 100),
-            count=1,
-            code=str(order.id),
-            units=1,
-            vat_percent=15,
-            package_code="123456"
-        )
+        for item in order.items.all():
+            product = item.product_variant.product
 
-        result.add_item(item)
+            item_total = item.price * item.quantity
+            cashback = order.cashback_used or 0
+            discount_share = (item_total / total_price) * cashback if total_price else 0
+
+            response_item = response.Item(
+                discount=int(discount_share * 100),  # tiyin format
+                title=product.name_uz,
+                price=int(item_total * 100),
+                count=item.quantity,
+                code=product.ikpu,
+                units=product.units_id,
+                vat_percent=12,
+                package_code=str(order.id)
+            )
+
+            result.add_item(response_item)
+
         return result.as_resp()
 
     def handle_successfully_payment(self, params, result, *args, **kwargs):

@@ -5,13 +5,13 @@ from .models import *
 class UserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'cashback_balance']
+        fields = ['first_name', 'last_name']
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'phone_number', 'first_name', 'last_name']
+        fields = ['id', 'username', 'phone_number', 'first_name', 'last_name', 'cashback_balance']
 
 
 class PhoneLoginSerializer(serializers.Serializer):
