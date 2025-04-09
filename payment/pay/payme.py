@@ -14,7 +14,10 @@ class PaymeCallBackAPIView(PaymeWebHookAPIView):
         account = self.fetch_account(params)
         self.validate_amount(account, params.get('amount'))
 
-        result = response.CheckPerformTransaction(allow=True)
+        result = response.CheckPerformTransaction(
+            allow=True,
+            receipt_type=0  # 0 - sotuv, 1 - qaytarish
+        )
         order = account
         total_price = sum([item.price * item.quantity for item in order.items.all()])
 
@@ -28,12 +31,12 @@ class PaymeCallBackAPIView(PaymeWebHookAPIView):
             response_item = response.Item(
                 discount=int(discount_share * 100),  # tiyin format
                 title=product.name_uz,
-                price=int(item_total * 100),
+                price=int(item.price * 100),
                 count=item.quantity,
                 code=product.ikpu,
-                units=product.units_id,
+                units=int(product.units_id),
                 vat_percent=12,
-                package_code=str(order.id)
+                package_code=product.units_id
             )
 
             result.add_item(response_item)

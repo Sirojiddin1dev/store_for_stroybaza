@@ -93,7 +93,7 @@ class OrderPaymentUpdate(views.APIView):
                 payme = Payme(payme_id=payme_id)
                 payment_link = payme.initializer.generate_pay_link(
                     id=order.id,
-                    amount=int(float(order.total_amount) * 100),  # Tiyin/kopeyka hisobida
+                    amount=int(float(order.total_amount)),  # Tiyin/kopeyka hisobida
                     return_url={settings.FRONTEND_URL}
                 )
 
