@@ -28,6 +28,9 @@ class PaymeCallBackAPIView(PaymeWebHookAPIView):
             cashback = order.cashback_used or 0
             discount_share = (item_total / total_price) * cashback if total_price else 0
 
+            # QQS ni partiyaga qarab belgilash
+            vat_percent = 0 if product.part == 1 else 12
+
             response_item = response.Item(
                 discount=int(discount_share * 100),  # tiyin format
                 title=product.name_uz,
@@ -35,7 +38,7 @@ class PaymeCallBackAPIView(PaymeWebHookAPIView):
                 count=item.quantity,
                 code=product.ikpu,
                 units=int(product.units_id),
-                vat_percent=12,
+                vat_percent=vat_percent,
                 package_code=product.units_id
             )
 
